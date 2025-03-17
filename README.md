@@ -1,9 +1,10 @@
 Regional Sales Tracking in Video Games
 
 Introduction
-In 2023, the video game market is projected to reach a revenue of $249.60 billion USD1, a remarkable figure especially when considering how video games started as a niche pastime and 
+
+In 2023, the video game market is projected to reach a revenue of $249.60 billion USD, a remarkable figure especially when considering how video games started as a niche pastime and 
 were often marketed as toys for kids just a few decades ago. This staggering growth trajectory, slated to continue at an annual rate of 9.32% between 2023 and 2028, paints a picture of
-an industry poised for even greater heights, with a projected market volume reaching $389.70 billion by 20282. However, as the projected revenue for the industry continues to rise, so
+an industry poised for even greater heights, with a projected market volume reaching $389.70 billion by 2028. However, as the projected revenue for the industry continues to rise, so
 do the costs associated with game development, which means the decision of which platform to release a game on has become a pivotal determinant of success. Although launching a game on 
 all platforms might have advantages, it also entails additional time and resource investments. Therefore, I am interested in understanding the correlation between the chosen game 
 platform and the subsequent sales performance for games on that platform. The decision to pursue an international game release also entails significant expenses, such as translating 
@@ -13,7 +14,8 @@ collaborate with publishers who have a track record of success in a particular r
 influences sales outcomes, as does the geographic origins of a game’s publisher, and will showcase these factors in the coming sections.
 
 Background
-The dataset3 is a list of the 16718 mainstream video games released from 1980 to 2020 and was collected by scraping data from https://www.vgchartz.com/, a data and statistics repository
+
+The dataset is a list of the 16718 mainstream video games released from 1980 to 2020 and was collected by scraping data from https://www.vgchartz.com/, a data and statistics repository
 on video games. The dataset includes numerous variables: “platform” indicates the hardware for which the game was released, “genre” denotes the game’s categorization, “developers” 
 specifies the development studio credited with creating the game, “publisher” refers to the group who published and marketed the game, “critic score” represents the average score given 
 by video game critics, “user score” reflects the average score given by consumers, and each game includes global sales data along with individual sales data for the three major video 
