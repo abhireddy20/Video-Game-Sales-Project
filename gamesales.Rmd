@@ -1,0 +1,172 @@
+---
+title: "Regional Sales Tracking in Video Games"
+output: html_document
+date: "2023-11-28"
+author: "Abhiraam T."
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+```
+
+## **Analysis/R**
+
+```{r, echo = FALSE, message = FALSE}
+vg = read_csv("Video_Games.csv")
+vgtotal = vg %>%
+  group_by(Publisher) %>%
+  reframe(totalglobal = sum(Global_Sales)) %>%
+  top_n(10) %>%
+  reframe(Publisher, totalglobal) %>%
+  arrange(desc(totalglobal))
+vgtotal
+
+vgbar = ggplot(vgtotal, aes(x = Publisher, y = totalglobal)) +
+  geom_col() +
+  labs(x = "Name of Publisher", y = "Total sales globally (in millions)", title = "Publisher Global Sales Performance") +
+  scale_y_continuous() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+vgbar
+
+vgna = vg %>%
+  group_by(Publisher) %>%
+  reframe(totalna = sum(NA_Sales)) %>%
+  reframe(Publisher, totalna) %>%
+  top_n(10) %>%
+  arrange(desc(totalna))
+vgna
+
+vgnabar = ggplot(vgna, aes(x = Publisher, y = totalna)) +
+  geom_col() +
+  labs(x = "Name of Publisher", y = "Total sales in the NA Region (in millions)", title = "Publisher North America Sales Performance") +
+  scale_y_continuous() +
+  theme_minimal()  +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+vgnabar
+
+vgeu = vg %>%
+  group_by(Publisher) %>%
+  reframe(totaleu = sum(EU_Sales)) %>%
+  reframe(Publisher, totaleu) %>%
+  top_n(10) %>%
+  arrange(desc(totaleu))
+vgeu
+
+vgeubar = ggplot(vgeu, aes(x = Publisher, y = totaleu)) +
+  geom_col() +
+  labs(x = "Name of Publisher", y = "Total sales in the EU Region (in millions)", title = "Publisher Europe Sales Performance") +
+  scale_y_continuous() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+vgeubar
+
+vgjp = vg %>%
+  group_by(Publisher) %>%
+  reframe(totaljp = sum(JP_Sales)) %>%
+  reframe(Publisher, totaljp) %>%
+  top_n(10) %>%
+  arrange(desc(totaljp))
+vgjp
+
+vgjpbar = ggplot(vgjp, aes(x = Publisher, y = totaljp)) +
+  geom_col() +
+  labs(x = "Name of Publisher", y = "Total sales in Japan (in millions)", title = "Publisher Japan Sales Performance") +
+  scale_y_continuous() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+vgjpbar
+```
+
+> Geographic Influence on Sales:
+-The analysis suggests a clear correlation between the geographic origins of publishers and the sales performance of video games in specific regions. Nintendo's dominance in Japan and Western publishers' success in North America and Europe exemplify this trend.
+-Inference: Publishers with a deep understanding of their home market and cultural nuances tend to perform better, emphasizing the importance of localization, marketing strategies, and cultural alignment.
+
+> Publisher Strategies:
+-Successful publishers exhibit distinct strategies tailored to their target regions. Western publishers tend to fare well in their home regions, while Japanese publishers dominate in Japan.
+-Inference: Publishers should adopt region-specific strategies, including effective marketing campaigns, partnerships with local entities, and adapting game content to align with cultural preferences.
+
+```{r, echo = FALSE, message = FALSE}
+vgps = vg %>%
+  group_by(Platform) %>%
+  reframe(totalglobal = sum(Global_Sales)) %>%
+  reframe(Platform, totalglobal) %>%
+  top_n(10)%>%
+  arrange(desc(totalglobal))
+vgps
+
+vgpsbar = ggplot(vgps, aes(x = Platform, y = totalglobal)) +
+  geom_col() +
+  labs(x = "Name of Platform", y = "Total global sales (in millions)", title = "Platform Video Game Sales") +
+  scale_y_continuous() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+vgpsbar
+```
+
+> Platform Preference:
+-The analysis highlights the significant success of Sony's platforms, particularly the PlayStation series. This success is consistent across multiple generations, indicating a strong preference for Sony's gaming consoles.
+-Inference: Launching a game on Sony platforms increases the likelihood of high sales, potentially due to a loyal user base, exclusive titles, and effective marketing.
+
+```{r, echo = FALSE, message = FALSE}
+vg = vg %>%
+    group_by(Platform) %>%
+  reframe(Name, Platform, pct_na = NA_Sales/Global_Sales, pct_eu = EU_Sales/Global_Sales, pct_jp = JP_Sales/Global_Sales, pct_other = Other_Sales/Global_Sales, Global_Sales) %>%
+  arrange(desc(Global_Sales))
+vg
+
+vgavg = vg %>%
+  reframe(n = n(), meanna = mean(pct_na), meaneu = mean(pct_eu), meanjp = mean(pct_jp), meanother = mean(pct_other))
+vgavg
+
+ggplot(vg, aes(x = pct_na)) +
+  geom_density(fill = "lightpink", color = "black") +
+  geom_hline(yintercept = 0) +
+  xlab("Percent of Sales from Region") +
+  ggtitle("Video Game Sales",
+          subtitle = "From North America Region") +
+  theme_minimal() 
+
+ggplot(vg, aes(x = pct_eu)) +
+  geom_density(fill = "lightblue", color = "black") +
+  geom_hline(yintercept = 0) +
+  xlab("Percent of Sales from Region") +
+  ggtitle("Video Game Sales",
+          subtitle = "From Europe Region") +
+  theme_minimal()
+
+ggplot(vg, aes(x = pct_jp)) +
+  geom_density(fill = "darkred", color = "black") +
+  geom_hline(yintercept = 0) +
+  xlab("Percent of Sales from Region") +
+  ggtitle("Video Game Sales",
+          subtitle = "From Japan") +
+  theme_minimal()
+
+ggplot(vg, aes(x = pct_other)) +
+  geom_density(fill = "purple", color = "black") +
+  geom_hline(yintercept = 0) +
+  xlab("Percent of Sales from Regions Not Previously Listed") +
+  ggtitle("Video Game Sales",
+          subtitle = "From Unlisted Regions") +
+  theme_minimal()
+
+t_test_result = t.test(vg$pct_na, vg$pct_eu)
+cat("Test Statistic:", t_test_result$statistic, "\n")
+cat("Confidence Interval: ", t_test_result$conf.int)
+
+```
+> The p-value of running the t-test between the percent representation of sales in NA and EU returns with 2.2^e-16, meaning that there is enough evidence to conclude that there is a significant difference between the two data points. The t-value is also 70.12 meaning that the difference is significant enough to confirm that there is a large difference in sales. I am also confident that the average difference between the percentages is significant, being between 0.22 and 0.23. It is thus safe to say that the NA region holds a significant lead over its competitors in terms of making revenue for the gaming industry. We can also reject the null hypothesis through this, due to the value of p being significantly valuable.
+
+> The density plots show the contributions of each region to the sales of a game. For example, we can see that in the NA video games sales chart (the pink one), they usually take up the bulk of the sales because of the peaks in the graph at 0.5 and 0.75. These represent percentages of sales of a video game in that region. Likewise, we can see that Europe is not as strong of a contender, only averaging around 0.375, or 37.5% of the sales of a game. Japan is an outlier in this case, seeing as it either contributes nothing or almost everything to the sales of a game. Finally, other regions usually contribute around 10% of the sales as evidenced by the purple graph. From this, we can conclude that the most consistent consumers come from the North American countries due to the high average percentages, whereas other regions tend to be less consistent, namely Japan. This discrepancy is most likely caused by region-locked releases or region bias. As seen in our previous bar graphs, Nintendo, a studio from Japan, takes the lead in global sales and even in region-based sales. This is also seen in the Publisher Japan Sales Performance graph, where Nintendo dominates the other studios with over 400 million sales in that region, with the next highest being at a comparatively small 100 million. Therefore, it can be concluded that the oddity of the Japan density graph can be attributed to the apparent favoritism for studios based in it.
+
+> A graph I also decided to add was one depicting the sales of video games on each console. As seen in the graph and the table, the PS2 clearly takes the lead at a distinguished 1.26 billion sales. This is especially surprising considering how Nintendo is responsible for many of the most lucrative games as seen in the table that follows, with all the top ten entries being ones released on Nintendo platforms. This expectation can be attributed to the ongoing console wars between Sony and Microsoft, developers of the PlayStation and Xbox systems respectively. It would also explain how the Xbox 360 and the PS3 surpass the Wii, Nintendo's console. Finally, the added variety and raw power of the consoles contributes to their game diversity, whereas Nintendo focuses on its own exclusive game releases.
+
+## **Discussion**
+> Upon examining the Publisher Sales visualizations, two patterns emerge across the three pivotal markets—EU (Europe), NA (North America), and JP (Japan). First, Nintendo stands out as the dominant publisher, comfortably holding the top spot in total sales across all regions, with sales figures reaching 817 million in North America, 418 million in Europe, and 458 million in Japan, nearly 50% higher than the second largest publisher in each region. However, looking closely at the other publishers in the EU, NA, and JP, it appears that Nintendo is an exception to the otherwise prevailing trend. Focusing on the publishers from North America and Europe, it's evident that leading publishers predominantly hail from the Western Hemisphere. For example, Electronic Arts and Activision are headquartered in California and rank at number 2 and 3 in both regions, respectively. In fact, of the top 10 publishers in North America and Europe, only three companies originate outside the Western sphere—Sega, Sony Computer Entertainment, and Nintendo. This trend suggests a clear preference among Western consumers for games published by Western companies, with Nintendo standing as a notable exception. This pattern is echoed in Japan, where an examination of the top publishers reveals that every entity in the top 10 list is Japanese-based. Based on my findings, we can conclude that the geographic origins of publishers play a significant role in influencing the reception of video games in specific regions, most likely due to their understanding of their home market and region. After all, it's much more difficult for one to market a game to an unfamiliar audience and culture.
+
+> Analyzing the Platform Video Game Sales visualizations reveals a noteworthy trend. The PlayStation 2 emerges as the clear market leader, boasting an impressive total of 1256 million video games sold on the platform. Following a similar trajectory, the PlayStation 3 secures a significant position with 972 million sales, earning it the third spot. Notably, both the PlayStation 2 and 3 are products of Sony, and this trend extends to other platforms produced by the company. The PS, holding the 6th position, the PS4 securing the 8th position, and the PSP at the 9th position all contribute to showcasing Sony's consistent success across multiple platforms. This continuous success implies that launching a game on a Sony platform significantly increases the likelihood of high game sales compared to competing platforms. For instance, while the Microsoft-made Xbox 360 claimed second place in platform video game sales with 972 million, no other Microsoft-made platform appeared within the top 10 charts. This showcases the general preference for Sony's gaming platforms over competing alternatives and makes their platforms the ideal location to sell games in order to maximize profits.
+
+> However, there is still room for further investigation regarding these locational statistics. The dataframe does give the genre of the games that were released in the timeframe, which can be used to illustrate much more thorough graphs pertaining to the success of each genre. It can be surmised that a regression plot that highlights the correlation between the year and the sales/critic rating of a publisher's games is possible, but for the sake of this exploration, I decided to choose to highlight the average performances of each area in terms of how significant their sales are. New questions that might be addressed include "Is there a correlation between release year and performance of games in a genre?" "What is the relationship between genre and performance over time?" Finally, new data to consider in all of this would be considering whether or not a game has online play or not, as those tend to make more money over the long term than offline play games. Additionally, if possible, an artstyle column would be appreciated to open up further relationships between game genre and artstyle among other things. 
