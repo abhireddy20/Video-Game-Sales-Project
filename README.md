@@ -26,26 +26,28 @@ meaning it’s possible that some of the most popular publishers in the three ma
 decades, many publishers might be carried by their legacy of publishing quality titles, which might not accurately reflect their current status.
 
 Potential Future Directions for Additional Work:
-Market Trends Analysis: Explore the historical evolution of market trends in video game sales. Identify key turning points, emerging platforms, and shifts in consumer preferences.
 
-Publisher Strategy Investigation: Conduct a deeper analysis of the strategies employed by successful publishers in each region. Investigate marketing approaches, localization efforts,
+- Market Trends Analysis: Explore the historical evolution of market trends in video game sales. Identify key turning points, emerging platforms, and shifts in consumer preferences.
+
+- Publisher Strategy Investigation: Conduct a deeper analysis of the strategies employed by successful publishers in each region. Investigate marketing approaches, localization efforts,
 and partnerships that contribute to their success.
 
-Cultural Influences: Investigate how cultural factors influence video game preferences. Examine specific genres, themes, or game elements that resonate differently in Western and 
+- Cultural Influences: Investigate how cultural factors influence video game preferences. Examine specific genres, themes, or game elements that resonate differently in Western and 
 Japanese markets.
 
-Platform Loyalty Study: Explore the factors contributing to platform loyalty. Investigate whether exclusive titles, pricing strategies, or other factors play a significant role in 
+- Platform Loyalty Study: Explore the factors contributing to platform loyalty. Investigate whether exclusive titles, pricing strategies, or other factors play a significant role in 
 consumers’ choices of gaming platforms.
 
-Competitive Analysis: Compare and contrast the success of Sony’s platforms with those of competitors. Examine the strategies of Microsoft, Nintendo, and other major players in the 
+- Competitive Analysis: Compare and contrast the success of Sony’s platforms with those of competitors. Examine the strategies of Microsoft, Nintendo, and other major players in the 
 gaming industry.
 
 Different Methods to Address the Same Questions:
-Qualitative Research: Conduct interviews or surveys with gamers to gain qualitative insights into their preferences, the influence of culture on their gaming choices, and their loyalty to specific platforms.
 
-Comparative Case Studies: Analyze case studies of successful and unsuccessful game launches in different regions to understand the specific factors that contributed to their outcomes.
+- Qualitative Research: Conduct interviews or surveys with gamers to gain qualitative insights into their preferences, the influence of culture on their gaming choices, and their loyalty to specific platforms.
 
-Social Media Analysis: Utilize social media analytics to gauge public sentiment and preferences related to video games. Monitor trends, discussions, and reactions to new releases.
+- Comparative Case Studies: Analyze case studies of successful and unsuccessful game launches in different regions to understand the specific factors that contributed to their outcomes.
+
+- Social Media Analysis: Utilize social media analytics to gauge public sentiment and preferences related to video games. Monitor trends, discussions, and reactions to new releases.
 
 Sources:
 
